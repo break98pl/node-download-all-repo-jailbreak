@@ -40,7 +40,14 @@ async function downloadDeb(url, index) {
   }
 
   try {
-    const res = await axios.get(url, { responseType: 'stream' });
+    const res = await axios.get(url, { responseType: 'stream', headers: {
+            "x-machine": "iPhone6,1",
+            "x-unique-id": "8843d7f92416211de9ebb963ff4ce28125932878",
+            "x-firmware": "10.1.1",
+            "user-agent": "Telesphoreo APT-HTTP/1.0.592",
+            "accept-encoding": "gzip",
+            "host": "rejail.ru"
+        } });
     const writer = fs.createWriteStream(destPath);
     await new Promise((resolve, reject) => {
       res.data.pipe(writer);
